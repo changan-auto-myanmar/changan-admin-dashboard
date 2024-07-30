@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Navbar, Footer } from "@/widgets/layout";
 import routes from "@/routes";
+import { Toaster } from "sonner";
 
 export function Auth() {
   const navbarRoutes = [
@@ -34,6 +35,7 @@ export function Auth() {
 
   return (
     <div className="relative min-h-screen w-full">
+      <Toaster position="top-center" richColors />
       <Routes>
         {routes.map(
           ({ layout, pages }) =>
