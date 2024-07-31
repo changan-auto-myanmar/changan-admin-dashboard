@@ -3,6 +3,7 @@ import { toast } from "sonner";
 
 const forgotPassword = async (data) => {
   const toastId = toast.loading("Sending email...");
+
   try {
     const response = await axios.post("api/v1/auth/forgot-password", data);
     toast.success("Sent Email!", {
