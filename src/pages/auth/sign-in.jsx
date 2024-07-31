@@ -20,7 +20,6 @@ export function SignIn() {
     const res = await handleLogin(data);
     console.log(res);
     if (res) {
-      toast.loading("Logging in...");
       setTimeout(() => {
         navigate("/dashboard/home");
       }, 1000);
@@ -28,8 +27,8 @@ export function SignIn() {
   };
 
   return (
-    <section className="mx-8 flex gap-4">
-      <div className="w-full lg:w-3/5 mt-24">
+    <section className="mx-8 h-screen flex items-center justify-center">
+      <div className="w-full lg:w-3/5 mt-8 flex flex-col items-center justify-center">
         <div className="text-center">
           <Typography variant="h2" className="font-bold mb-4">
             Sign In
@@ -92,6 +91,15 @@ export function SignIn() {
           <Button className="mt-6" fullWidth onClick={handleSubmit}>
             Sign In
           </Button>
+
+          <Typography
+            variant="paragraph"
+            className="text-center text-blue-gray-500 font-medium mt-4"
+          >
+            <Link to="/auth/forgot-password" className="text-gray-900 ml-1">
+              Forgot Password?
+            </Link>
+          </Typography>
 
           <Typography
             variant="paragraph"

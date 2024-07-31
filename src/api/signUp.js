@@ -2,8 +2,13 @@ import axios, { setAuthToken } from "./../axios";
 import { toast } from "sonner";
 
 const handleSignUp = async (data) => {
+  const toastId = toast.loading("Signing up...");
   try {
     const response = await axios.post("api/v1/auth/signup", data);
+    toast.success("Sign up successfully!", {
+      id: toastId,
+      autoClose: 500, // Auto-close the toast after 5 seconds
+    });
     console.log(response.data);
     const changanToken = response.data.token;
     setAuthToken(changanToken);
@@ -11,9 +16,12 @@ const handleSignUp = async (data) => {
 
     return response.data;
   } catch (error) {
-    toast.error(error.response.data.message);
-    console.log(error.response.data.message);
-    console.log(error.response.status);
+    toast.error(`${error.response.data.message}`, {
+      id: toastId,
+      autoClose: 500, // Auto-close the toast after 5 seconds
+    });
+    console.log(error);
+    return error;
   }
 };
 

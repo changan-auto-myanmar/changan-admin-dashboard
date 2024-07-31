@@ -1,92 +1,49 @@
 import { Input, Button, Typography } from "@material-tailwind/react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { toast } from "sonner";
-import handleSignUp from "@/api/signUp";
+import resetPassword from "../../api/resetPassword";
 
-export function SignUp() {
-  const navigate = useNavigate();
-  const [domainName, setDomainName] = useState("");
-  const [email, setEmail] = useState("");
+export function ResetPassword() {
+  const { token } = useParams();
+  //   console.log(token);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const role = "user";
 
   const handleSubmit = async () => {
     const data = {
-      domainName,
-      email,
       password,
       confirmPassword,
-      role,
+      token,
     };
-    const res = await handleSignUp(data);
-    console.log(res);
-    if (res.statusCode === 201) {
-      toast.success("Account created successfully!");
+    const res = await resetPassword(data);
+    if (res) {
       setTimeout(() => {
-        navigate("/dashboard/home");
+        navigate("/auth/sign-in");
       }, 1000);
     }
   };
 
   return (
-    <section className="mx-8 h-screen flex items-center justify-center">
-      <div className="w-2/5 mt-8 hidden lg:block">
-        <img
-          src="/img/pattern.png"
-          className="h-[500px] w-full object-cover rounded-3xl"
-        />
-      </div>
-      <div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
-        <Typography variant="h2" className="font-bold">
-          Create Your Account
-        </Typography>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
-          <div className="mb-5 flex flex-col gap-3">
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="-mb-3 font-medium"
-            >
-              Your Domain
-            </Typography>
-            <Input
-              value={domainName}
-              onChange={(e) => setDomainName(e.target.value)}
-              size="lg"
-              placeholder="name.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-          </div>
-
-          <div className="mb-5 flex flex-col gap-3">
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="-mb-3 font-medium"
-            >
-              Your email
-            </Typography>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              size="lg"
-              placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-          </div>
-
+    <section className="">
+      <div className="w-full h-screen flex flex-col items-center justify-center">
+        <div className="text-center">
+          <Typography variant="h2" className="font-bold ">
+            Reset Password
+          </Typography>
+          <Typography
+            variant="paragraph"
+            color="blue-gray"
+            className="text-lg font-normal"
+          >
+            Enter Your New Password
+          </Typography>
+        </div>
+        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/4">
           <div className="mb-5 flex flex-col gap-3">
             <Typography
               variant="small"
@@ -150,23 +107,13 @@ export function SignUp() {
             )}
           </div>
 
-          <Button className="mt-6" fullWidth onClick={() => handleSubmit()}>
-            Register Now
+          <Button className="mt-6" fullWidth onClick={handleSubmit}>
+            Reset Password
           </Button>
-
-          <Typography
-            variant="paragraph"
-            className="text-center text-blue-gray-500 font-medium mt-4"
-          >
-            Already have an account?
-            <Link to="/auth/sign-in" className="text-gray-900 ml-1">
-              Sign in
-            </Link>
-          </Typography>
         </form>
       </div>
     </section>
   );
 }
 
-export default SignUp;
+export default ResetPassword;
