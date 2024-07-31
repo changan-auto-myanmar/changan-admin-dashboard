@@ -5,7 +5,7 @@ const resetPassword = async (data) => {
   const toastId = toast.loading("Resetting password...");
   console.log(data);
   try {
-    const response = await axios.post(
+    const response = await axios.patch(
       "api/v1/auth/reset-password/" + data.token,
       {
         password: data.password,

@@ -8,6 +8,7 @@ import resetPassword from "../../api/resetPassword";
 
 export function ResetPassword() {
   const { token } = useParams();
+  const navigate = useNavigate();
   //   console.log(token);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

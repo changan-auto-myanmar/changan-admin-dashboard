@@ -3,9 +3,10 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 const token = localStorage.getItem("authToken");
 // let usertoken = localStorage.getItem("token");
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.withCredentials = true;
-axios.defaults.withXSRFToken = true;
-axios.defaults.headers.common["Access-Control-Allow-Credentials"] = true;
+// axios.defaults.withCredentials = true;
+// axios.defaults.withXSRFToken = true;
+// axios.defaults.headers.common["Access-Control-Allow-Credentials"] = true;
+// axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 const setAuthToken = (token) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
