@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "/api";
+const BASE_URL = import.meta.env.VITE_API_URL;
 const token = localStorage.getItem("authToken");
 // let usertoken = localStorage.getItem("token");
 axios.defaults.baseURL = BASE_URL;
