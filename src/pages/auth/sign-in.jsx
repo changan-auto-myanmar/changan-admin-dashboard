@@ -1,10 +1,11 @@
 import { Input, Button, Typography } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { toast } from "sonner";
 import handleLogin from "@/api/signIn";
+import axios from "axios";
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -25,6 +26,20 @@ export function SignIn() {
       }, 1000);
     }
   };
+
+  // const getBanner = async () => {
+  //   const res = await axios.get(
+  //     "https://dev-changan-automobile.onrender.com/api/v1/banners/public"
+  //     "https://dev-changan-automobile.onrender.com/api/v1/banners/cms"
+  //   );
+  //   console.log(res);
+  // };
+
+  // useEffect(() => {
+  //   getBanner();
+  // }, [email]);
+
+  // console.log(email);
 
   return (
     <section className="mx-8 h-screen flex items-center justify-center">

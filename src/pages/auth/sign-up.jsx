@@ -14,7 +14,7 @@ export function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const role = "user";
+  const role = "admin";
 
   const handleSubmit = async () => {
     const data = {

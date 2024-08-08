@@ -10,6 +10,7 @@ import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import Banner from "./pages/dashboard/Banner";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -24,6 +25,12 @@ export const routes = [
         name: "dashboard",
         path: "/home",
         element: <Home />,
+      },
+      {
+        icon: <HomeIcon {...icon} />,
+        name: "banner",
+        path: "/banner",
+        element: <Banner />,
       },
       {
         icon: <UserCircleIcon {...icon} />,

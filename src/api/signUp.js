@@ -9,10 +9,12 @@ const handleSignUp = async (data) => {
       id: toastId,
       autoClose: 500, // Auto-close the toast after 5 seconds
     });
-    console.log(response.data);
-    const changanToken = response.data.token;
+    // console.log(response.data);
+    const changanToken = response.data.data.token;
     setAuthToken(changanToken);
-    localStorage.setItem("authToken", changanToken);
+    localStorage.setItem("changanToken", changanToken);
+    let decodedToken = jwtDecode(changanToken);
+    localStorage.setItem("expirationTime", decodedToken.iat * 1000);
 
     return response.data;
   } catch (error) {
