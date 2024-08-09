@@ -6,11 +6,17 @@ import {
   CardBody,
   CardFooter,
 } from "@material-tailwind/react";
+import axios from "./../../axios";
+import { toast } from "sonner";
 
-const AddImage = () => {
+const AddImage = ({ show }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
+
+  const sendMessage = () => {
+    show();
+  };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -20,25 +26,27 @@ const AddImage = () => {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!selectedImage) return;
+    console.log(selectedImage);
 
-    const formData = new FormData();
-    formData.append("image", selectedImage);
+    const formData = {
+      image: selectedImage,
+    };
+    console.log(formData);
+    try {
+      const res = await axios.post("api/v1/banners", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success("Image Upload Complete");
+      sendMessage();
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
 
     // Replace the following URL with your image upload endpoint
-    fetch("https://your-upload-url.com/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Image uploaded successfully:", data);
-        resetImage();
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
-      });
   };
 
   const triggerFileInput = () => {

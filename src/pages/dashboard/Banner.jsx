@@ -8,7 +8,7 @@ function Banner() {
   return (
     <div className="relative">
       <div className={show ? "opacity-60" : "opacity-100"}>
-        <BannerCarousel />
+        <BannerCarousel show={show} />
       </div>
       <div className="mt-2">
         <Button
@@ -21,7 +21,7 @@ function Banner() {
       </div>
       {show && (
         <div className="absolute bottom-[50%] left-[50%] translate-y-[50%] translate-x-[-50%]">
-          <AddImage />
+          <AddImage show={() => setShow(false)} />
         </div>
       )}
     </div>
